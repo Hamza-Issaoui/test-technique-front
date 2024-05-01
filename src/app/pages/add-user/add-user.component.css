@@ -1,10 +1,10 @@
 .btn-gray {
-    background-color: #6c757d; /* Gray color */
-    color: #fff; /* White text */
-    border-color: #6c757d; /* Matching border color */
+    background-color: #6c757d; 
+    color: #fff; 
+    border-color: #6c757d; 
   }
   
   .btn-gray:hover {
-    background-color: #5a6268; /* Darker gray color on hover */
-    border-color: #545b62; /* Matching border color on hover */
+    background-color: #5a6268;
+    border-color: #545b62;
   }
