@@ -1,0 +1,48 @@
+<div *ngIf="article" class="article-container mt-4">
+  <div class="article-header">
+    <h1 class="article-title">{{ article.title }}</h1>
+   
+    <img 
+    *ngIf="article.image" 
+    [src]="getImageUrl(article.image)" 
+    alt="Article image" 
+    class="article-image"
+  />
+  </div>
+
+  <div class="article-content" [innerHTML]="article.content"></div>
+
+  <hr class="divider" />
+
+  <div class="comments-section">
+    <h3 class="section-title">Comments</h3>
+    
+    <div class="add-comment">
+      <textarea 
+        [(ngModel)]="newComment" 
+        placeholder="Share your thoughts..."
+        maxlength="500"
+      ></textarea>
+      <div class="char-count" *ngIf="newComment">{{ newComment.length }}/500</div>
+      <button 
+        (click)="addComment()" 
+        [disabled]="!newComment.trim()"
+      >
+        Post Comment
+      </button>
+    </div>
+
+    <div class="comment-thread" *ngFor="let c of comments">
+      <app-comment-thread [comment]="c" [articleId]="article._id"></app-comment-thread>
+    </div>
+
+    <div *ngIf="comments.length === 0" class="no-comments">
+      <p>No comments yet. Be the first to share your thoughts!</p>
+    </div>
+  </div>
+  <div class="action-buttons mt-4">
+    <button mat-raised-button color="primary" type="button" (click)="goBack()" >
+      Retour
+    </button>
+  </div>
+</div>

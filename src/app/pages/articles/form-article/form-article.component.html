@@ -1,0 +1,62 @@
+<div class="article-form-container">
+  <h2>{{ isEdit ? 'Modifier un article' : 'Créer un article' }}</h2>
+
+  <form [formGroup]="articleForm" (ngSubmit)="onSubmit()" class="form-content">
+
+    <!-- Titre -->
+    <mat-form-field appearance="outline" class="full-width fancy-input">
+      <mat-label>Titre</mat-label>
+      <input matInput formControlName="title" placeholder="Titre de l'article" />
+      <mat-error *ngIf="articleForm.get('title')?.hasError('required')">
+        Le titre est requis
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Contenu -->
+    <mat-form-field appearance="outline" class="full-width fancy-input">
+      <mat-label>Contenu</mat-label>
+      <textarea
+        matInput
+        formControlName="content"
+        placeholder="Contenu de l'article"
+        rows="6"
+      ></textarea>
+      <mat-error *ngIf="articleForm.get('content')?.hasError('required')">
+        Le contenu est requis
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Tags -->
+    <mat-form-field appearance="outline" class="full-width fancy-input">
+      <mat-label>Tags (séparés par des virgules)</mat-label>
+      <input matInput formControlName="tags" placeholder="ex: tech, angular, backend" />
+    </mat-form-field>
+
+    <!-- Upload Image Drag & Drop -->
+    <div class="upload-section" [class.hover]="isHovering" 
+         (dragover)="isHovering = true" (dragleave)="isHovering = false" 
+         (drop)="onFileDropped($event)">
+      <label class="upload-label">Image de l'article :</label>
+
+      <div class="upload-box">
+        <input type="file" (change)="onFileSelected($event)" accept="image/*" />
+        <p *ngIf="!previewUrl">Glissez-déposez une image ou cliquez ici</p>
+        <img *ngIf="previewUrl" [src]="previewUrl" alt="Aperçu" class="preview-img" />
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="action-buttons">
+      <button mat-raised-button color="primary" type="submit" [disabled]="articleForm.invalid">
+        {{ isEdit ? 'Mettre à jour' : 'Publier' }}
+      </button>
+      <button mat-stroked-button color="warn" type="button" (click)="goBack()" routerLink="/articles">
+        Annuler
+      </button>
+    </div>
+
+  </form>
+</div>
+
+  
+  

@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../shared/table-users.service';
 import Swal from 'sweetalert2';
-import { AuthService } from '../shared/auth.service';
+import { AuthService } from '../shared/authGuard/auth.service';
+
 
 @Component({
   selector: 'app-table-users',
@@ -18,13 +19,15 @@ import { AuthService } from '../shared/auth.service';
 
 export class TableUsersComponent implements OnInit {
   users: any[] = [];
+  
   constructor(
     private router: Router,
     private userService: UserService,
-    private authService: AuthService
+
   ) { }
   ngOnInit(): void {
     this.fetchUsers();
+
   }
 
   fetchUsers(): void {
@@ -84,12 +87,6 @@ export class TableUsersComponent implements OnInit {
     });
   }
 
-  logout() {
-    localStorage.removeItem('authToken');
-
-    this.router.navigateByUrl('/login');
-  }
-
   navigate(id: any, type: string): void {
     this.router.navigate(['/update-user', {
       id: id,
@@ -100,5 +97,7 @@ export class TableUsersComponent implements OnInit {
   goToCreateUser(): void {
     this.router.navigate(['/create-user']);
   }
-
+  trackByFn(index: number, item: any): number {
+    return item.id;
+  }
 }

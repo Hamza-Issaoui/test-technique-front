@@ -4,29 +4,29 @@ import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { env } from '../../../environment/environment';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class UserService {
   private path = env.envUrl
 
   constructor(private _httpClient: HttpClient) { }
 
   getOneUser(id: string) {
-    const url = `${this.path}/users/${id}`
+    const url = `${this.path}/api/users/${id}`
     return this._httpClient.get(url)
   }
 
   getAllUsers(): Observable<any> {
-    const url = `${this.path}/users/`
+    const url = `${this.path}/api/users/`
     return this._httpClient.get(url)
   }
 
   updateUser(id: string, userData: any) {
-    const url = `${this.path}/users/${id}`
+    const url = `${this.path}/api/users/${id}`
     return this._httpClient.put(url, userData)
   }
 
   deleteUser(id: string): Observable<any> {
-    const url = `${this.path}/users/${id}`
+    const url = `${this.path}/api/users/${id}`
     return this._httpClient.delete(url)
   }
 

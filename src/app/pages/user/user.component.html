@@ -1,5 +1,5 @@
-@if (user) {
-  <div class="vh-100" style="background-color: #eee;">
+
+  <div *ngIf="user" class="vh-100 mt-4" style="background-color: #eee;">
     <div class="container h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-lg-12 col-xl-11">
@@ -7,12 +7,12 @@
             <div class="card-body p-md-5">
               <div class="row justify-content-center">
                 <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
-                  @if (action == 'View') {
-                  <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Details</p>
-                  }
-                  @if (action == 'Edit') {
-                    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Update User</p>
-                    }
+                
+                  <p *ngIf="action == 'View'" class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Details</p>
+                  
+                  
+                    <p *ngIf="action == 'Edit'" class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Update User</p>
+                    
               <form>
                 <div class="row">
                   <div class="col-md-6 mb-4">
@@ -41,32 +41,33 @@
                       <input [disabled]='action == "Edit" ? false : true' type="tel" id="phone" name="phone" class="form-control form-control-lg" [(ngModel)]="user.user.phone" />
                     </div>
                   </div>
-                  @if (action == 'View') {
-                  <div class="col-md-6 mb-4 pb-2">
+                  
+                  <div *ngIf="action == 'View'" class="col-md-6 mb-4 pb-2">
                     <div data-mdb-input-init class="form-outline">
                       <label class="form-label" for="role">Role</label>
                       <input [disabled]='action == "Edit" ? false : true' type="tel" id="role" name="role" class="form-control form-control-lg" [(ngModel)]="user.user.role" />
                     </div>
                   </div>
-                }
+                
                 </div>
-                @if (action == 'Edit') {
-                  <div class="row">
+                
+                  <div *ngIf="action == 'Edit'" class="row">
                     <label class="form-label select-label">Role</label>
                     <div class="col-12">
                       <select class="select form-control-lg" name="role" [(ngModel)]="user.user.role">
-                        <option value="1" disabled>Choose option</option>
-                        <option value="admin">Admin</option>
-                        <option value="user">User</option>
-                        <option value="superviseur">Supervisor</option>
+                        <option value="1" disabled>Choisir une option :</option>
+                        <option value="Admin">Admin</option>
+                        <option value="User">Lecteur</option>
+                        <option value="Editeur">Editeur</option>
+                        <option value="Rédacteur">Rédacteur</option>
                       </select>
                     </div>
                   </div>
-                }
+                
                 <div class="mt-4 pt-2 d-flex justify-content-between">
-                  @if (action == 'Edit') {
-                  <input data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg" type="submit" value="Update" (click)="updateUser()"/>
-                }
+                
+                  <input *ngIf="action == 'Edit'" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg" type="submit" value="Update" (click)="updateUser()"/>
+                
                   <input data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg btn-gray" type="submit" value="Retour" (click)="goToUsers()"/>
                 </div>
               
@@ -80,5 +81,5 @@
   </div>
 </div>
 </div>
-}
+
 

@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Register } from './register.interface';
-import { AuthService } from '../shared/auth.service';
+import { AuthService } from '../shared/authGuard/auth.service';
 import Swal from 'sweetalert2';
 
 @Component({

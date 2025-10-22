@@ -1,0 +1,28 @@
+<div class="comment-card">
+  <div class="comment-header">
+    <strong class="author">{{ comment.author }}</strong>
+    <span class="date">{{ comment.date | date:'short' }}</span>
+  </div>
+
+  <p class="comment-content">{{ comment.content }}</p>
+
+  <div class="comment-actions">
+    <button class="reply-btn" (click)="toggleReplyForm()">
+      {{ showReplyForm ? 'Cancel' : 'Reply' }}
+    </button>
+  </div>
+
+  <div class="reply-form" *ngIf="showReplyForm">
+    <textarea [(ngModel)]="replyContent" placeholder="Write your reply..." rows="2"></textarea>
+    <button class="send-btn" (click)="sendReply()">Send</button>
+  </div>
+
+  <div class="replies" *ngIf="comment.children?.length">
+    <app-comment-thread
+      *ngFor="let child of comment.children"
+      [comment]="child"
+      [articleId]="articleId">
+    </app-comment-thread>
+  </div>
+</div>
+

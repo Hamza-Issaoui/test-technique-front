@@ -1,0 +1,73 @@
+<div class="articles-page mt-4">
+  <!-- Barre de recherche -->
+  <div class="search-bar">
+    <input 
+      type="text" 
+      [(ngModel)]="search" 
+      placeholder="Search articles by title, author, or tags..." 
+      (keyup.enter)="searchArticles()"
+    />
+    <button (click)="searchArticles()">
+      <span class="search-icon">🔍</span>
+      Search
+    </button>
+  </div>
+  <div class="top-actions">
+    <button class="btn create-btn" (click)="createArticle()">Create Article</button>
+  </div>
+  <!-- Container des articles -->
+  <div class="articles-container">
+    <div *ngFor="let article of filteredArticles" class="article-card">
+      <img 
+      *ngIf="article.image" 
+      [src]="getImageUrl(article.image)" 
+      alt="Article image" 
+      class="article-image"
+    />
+      <div class="article-content">
+        <h2>{{ article.title }}</h2>
+        <p class="author">By {{ article.author?.name }}</p>
+        
+        <div class="tags" *ngIf="article.tags?.length">
+          <span *ngFor="let tag of article.tags.slice(0, 3)" class="tag">
+            {{ tag }}
+          </span>
+          <span *ngIf="article.tags.length > 3" class="tag-more">
+            +{{ article.tags.length - 3 }} more
+          </span>
+        </div>
+        
+        <p class="excerpt">{{ article.content?.substring(0, 150) }}...</p>
+        <div class="actions">
+          <button class="btn view-btn"  (click)="viewArticle(article)">View</button>
+          <button class="btn edit-btn" (click)="editArticle(article)">Edit</button>
+          <button class="btn delete-btn" (click)="deleteArticle(article)">Delete</button>
+        </div>
+              </div>
+    </div>
+  </div>
+
+  <!-- État vide -->
+  <div *ngIf="!loading && filteredArticles.length === 0" class="no-articles">
+    <div class="no-articles-icon">📝</div>
+    <h3>No articles found</h3>
+    <p *ngIf="search">No results for "{{ search }}". Try adjusting your search terms.</p>
+    <p *ngIf="!search">No articles available at the moment.</p>
+    <button *ngIf="search" (click)="clearSearch()" class="clear-search-btn">
+      Show All Articles
+    </button>
+  </div>
+
+  <!-- Indicateur de chargement -->
+  <div *ngIf="loading" class="loading">
+    <div class="loading-spinner"></div>
+    <p>Loading articles...</p>
+  </div>
+
+  <!-- Bouton Load More optionnel -->
+  <div *ngIf="!loading && filteredArticles.length > 0" class="load-more">
+    <button (click)="loadMore()" class="load-more-btn" *ngIf="hasMoreArticles">
+      Load More Articles
+    </button>
+  </div>
+</div>

@@ -1,0 +1,69 @@
+<main class="main">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+          <h2 class="sidebar-logo">HT</h2>
+        </div>
+    
+        <nav class="sidebar-nav">
+          <ul>
+            <li *ngIf="userRole === 'Admin'" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+              <a routerLink="/users">
+                <i class="fa-solid fa-users"></i>
+                <span>Users</span>
+              </a>
+            </li>
+            <li routerLinkActive="active">
+              <a routerLink="/articles">
+                <i class="fa-solid fa-newspaper"></i>
+                <span>Articles</span>
+              </a>
+            </li>
+            <li routerLinkActive="active" >
+              <a routerLink="/settings">
+                <i class="fa-solid fa-gear"></i>
+                <span>Settings</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+    
+      <!-- Navbar -->
+      <nav class="navbar-pro">
+        <div class="navbar-left">
+          <button class="menu-toggle" (click)="toggleSidebar()">
+            <i class="fa fa-bars"></i>
+          </button>
+          <a routerLink="/" class="logo">Technical Test</a>
+        </div>
+    
+        <div class="navbar-right">
+          <div class="notification-container">
+            <button class="notif-btn" (click)="toggleDropdown()">
+              <i class="fa fa-bell"></i>
+              <span *ngIf="unseenCount > 0" class="badge">{{ unseenCount }}</span>
+            </button>
+    
+            <div class="notif-dropdown" *ngIf="showDropdown">
+              <div *ngIf="notifications.length === 0" class="empty">No notifications</div>
+    
+              <div *ngFor="let notif of notifications" class="notif-item" [class.seen]="notif.seen">
+                <p>{{ notif.payload?.message }}</p>
+                <small>{{ notif.createdAt | date: 'short' }}</small>
+              </div>
+            </div>
+          </div>
+    
+          <button class="logout-btn" (click)="logout()">
+            <i class="fa fa-sign-out"></i> Logout
+          </button>
+        </div>
+      </nav>
+  
+    <!-- Router outlet for dynamic content -->
+    <section class="content">
+      <router-outlet></router-outlet>
+    </section>
+  </main>
+  

@@ -1,0 +1,113 @@
+.article-form-container {
+    max-width: 850px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 2rem;
+      color: #1a1a1a;
+      font-weight: 600;
+    }
+  
+    .form-content {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+  
+      .fancy-input {
+        width: 100%;
+  
+        mat-form-field {
+          border-radius: 10px;
+        }
+  
+        input, textarea {
+          font-size: 1rem;
+          padding: 12px;
+        }
+  
+        mat-label {
+          color: #555;
+        }
+  
+        mat-form-field.mat-focused .mat-form-field-outline {
+          border-color: #007bff;
+        }
+      }
+  
+      .upload-section {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+  
+        .upload-label {
+          font-weight: 500;
+          color: #333;
+        }
+  
+        .upload-box {
+          border: 2px dashed #ccc;
+          border-radius: 12px;
+          padding: 25px;
+          text-align: center;
+          cursor: pointer;
+          transition: all 0.2s;
+          position: relative;
+          min-height: 150px;
+  
+          &.hover {
+            border-color: #007bff;
+            background-color: #f0f8ff;
+          }
+  
+          input[type="file"] {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            top: 0;
+            left: 0;
+            cursor: pointer;
+          }
+  
+          p {
+            font-size: 0.95rem;
+            color: #666;
+          }
+  
+          .preview-img {
+            max-width: 200px;
+            max-height: 150px;
+            margin-top: 10px;
+            border-radius: 10px;
+            object-fit: cover;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+          }
+        }
+      }
+  
+      .action-buttons {
+        display: flex;
+        justify-content: flex-end;
+        gap: 15px;
+  
+        button {
+          min-width: 130px;
+          font-weight: 500;
+          border-radius: 10px;
+          transition: all 0.2s;
+  
+          &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+          }
+        }
+      }
+    }
+  }
+   
